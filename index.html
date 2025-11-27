@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenting Long, Ph.D | Medical AI Scientist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0f;
+            --secondary: #14141f;
+            --accent: #00d4aa;
+            --accent-dim: rgba(0, 212, 170, 0.15);
+            --accent-glow: rgba(0, 212, 170, 0.4);
+            --text: #e8e8ed;
+            --text-dim: #8888a0;
+            --gradient-1: linear-gradient(135deg, #00d4aa 0%, #00a3ff 50%, #7b61ff 100%);
+            --gradient-2: linear-gradient(180deg, rgba(0,212,170,0.08) 0%, transparent 60%);
+            --card-bg: rgba(20, 20, 35, 0.6);
+            --border: rgba(255,255,255,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -400px;
+            right: -200px;
+            background: var(--accent);
+        }
+
+        .bg-glow-2 {
+            bottom: -300px;
+            left: -200px;
+            background: #7b61ff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-dim);
+            border: 1px solid rgba(0,212,170,0.3);
+            border-radius: 100px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 4rem;
+            background: var(--secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+        }
+
+        /* Platform Section */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .platform-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .platform-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,212,170,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .platform-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .platform-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .platform-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-metrics {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .metric-value {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .metric-label {
+            color: var(--text-dim);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), #7b61ff);
+        }
+
+        .timeline-item {
+            padding-left: 3rem;
+            padding-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .timeline-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .timeline-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .skill-category h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(0,212,170,0.1);
+            border: 1px solid rgba(0,212,170,0.2);
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0,212,170,0.2);
+            border-color: var(--accent);
+        }
+
+        /* Publications */
+        .publications-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .pub-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .pub-item:hover {
+            border-color: rgba(0,212,170,0.3);
+            transform: translateX(10px);
+        }
+
+        .pub-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(0,212,170,0.3);
+            min-width: 60px;
+        }
+
+        .pub-content h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .pub-journal {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 4rem;
+            background: var(--gradient-2);
+        }
+
+        .contact-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-section p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 4rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            section, .hero, .stats-bar {
+                padding: 4rem 2rem;
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">WL.AI</div>
+        <ul class="nav-links">
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#publications">Research</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span>Available for Opportunities</span>
+            </div>
+            <h1>Building the Future of <span>Medical AI</span></h1>
+            <p class="hero-subtitle">
+                Ph.D. in Computational Mathematics with 8+ years advancing medical imaging through deep learning, multimodal fusion, and production-grade MLOps systems.
+            </p>
+            <div class="hero-cta">
+                <a href="#platform" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">8+</div>
+            <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">87%</div>
+            <div class="stat-label">AUC Achieved</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Patients Processed</div>
+        </div>
+    </div>
+
+    <!-- Platform Section -->
+    <section id="platform">
+        <div class="section-header fade-in">
+            <div class="section-tag">// Featured Project</div>
+            <h2 class="section-title">MedVision AI Platform</h2>
+        </div>
+        <div class="platform-grid">
+            <div class="platform-card fade-in">
+                <div class="platform-icon">🫁</div>
+                <h3>COVID-19 Screening</h3>
+                <p>Real-time lung pathology detection using optimized YOLOv5 architecture with DICOM preprocessing pipeline for clinical deployment.</p>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <span class="metric-value">&lt;5s</span>
+                        <span class="metric-label">Latency</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">YOLOv5</span>
+                        <span class="metric-label">Architecture</span>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-card fade-in">
+                <div class="platform-icon">📊</div>
+                <h3>Radiotherapy Toxicity Prediction</h3>
+                <p>Multimodal fusion architecture integrating 3D CT, EMR data, and dose maps using Temporal Transformer for radiation pneumonitis prediction.</p>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <span class="metric-value">87%</span>
+                        <span class="metric-label">AUC</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">+8.7pt</span>
+                        <span class="metric-label">vs Baseline</span>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-card fade-in">
+                <div class="platform-icon">🔄</div>
+                <h3>Longitudinal Change Detection</h3>
+                <p>4D CT registration with temporal attention mechanisms for lesion evolution modeling across baseline and follow-up scans.</p>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <span class="metric-value">4</span>
+                        <span class="metric-label">Timepoints</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">60%</span>
+                        <span class="metric-label">Time Saved</span>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-card fade-in">
+                <div class="platform-icon">📝</div>
+                <h3>Automated Report Generation</h3>
+                <p>VLM + RAG pipeline combining visual features with clinical knowledge base for structured radiology report drafting.</p>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <span class="metric-value">VLM</span>
+                        <span class="metric-label">Vision-Language</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">RAG</span>
+                        <span class="metric-label">Knowledge Base</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header fade-in">
+            <div class="section-tag">// Career Path</div>
+            <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Apr 2024 – Present</div>
+                <h3 class="timeline-title">Founder & Technical Lead</h3>
+                <div class="timeline-company">LongVis.AI Startup · Boston, MA</div>
+                <ul class="timeline-content">
+                    <li>Built multi-task AI platform with 4 core modules from scratch</li>
+                    <li>Designed multimodal fusion architecture for 3D CT, EMR, and dose maps</li>
+                    <li>Full technology stack: Docker, RESTful API, MLOps infrastructure</li>
+                    <li>Pitched to 10+ investors; established hospital pilot partnerships</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">May 2021 – Nov 2023</div>
+                <h3 class="timeline-title">AI Research Scientist</h3>
+                <div class="timeline-company">Yale University · New Haven, CT</div>
+                <ul class="timeline-content">
+                    <li>Led multimodal longitudinal AI system achieving 87% AUC (+8.7pt vs baseline)</li>
+                    <li>Built temporal feature engineering with 4D CT registration and ClinicalBERT</li>
+                    <li>Deployed on AWS SageMaker with sub-5s latency for 200+ patient datasets</li>
+                    <li>Reduced physicians' follow-up assessment time by 60%</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Nov 2018 – May 2021</div>
+                <h3 class="timeline-title">Computer Vision Scientist</h3>
+                <div class="timeline-company">Emory University · Atlanta, GA</div>
+                <ul class="timeline-content">
+                    <li>Developed GAN-based denoising pipeline with 35% SNR improvement</li>
+                    <li>Engineered photon-counting spectral CT simulation framework</li>
+                    <li>Published 7 papers in IEEE TBME, Medical Physics, and top venues</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Dec 2015 – Jun 2017</div>
+                <h3 class="timeline-title">Applied Research Scientist</h3>
+                <div class="timeline-company">Sun Yat-sen University · Guangzhou, China</div>
+                <ul class="timeline-content">
+                    <li>Secured 110,000 RMB National Research Project as Principal Investigator</li>
+                    <li>Developed optimization algorithms achieving 40% faster reconstruction</li>
+                    <li>Collaborated on Alzheimer's disease imaging-genotype correlation study</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header fade-in">
+            <div class="section-tag">// Technical Stack</div>
+            <h2 class="section-title">Skills & Expertise</h2>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category fade-in">
+                <h3>AI / ML</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Transformers</span>
+                    <span class="skill-tag">YOLO</span>
+                    <span class="skill-tag">GANs</span>
+                    <span class="skill-tag">Multimodal Fusion</span>
+                    <span class="skill-tag">Medical Imaging</span>
+                    <span class="skill-tag">Computer Vision</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">SageMaker</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">MLOps</span>
+                    <span class="skill-tag">CUDA</span>
+                    <span class="skill-tag">Spark</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Languages & Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">R</span>
+                    <span class="skill-tag">OpenCV</span>
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">DICOM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="section-header fade-in">
+            <div class="section-tag">// Research Output</div>
+            <h2 class="section-title">Selected Publications</h2>
+        </div>
+        <div class="publications-grid">
+            <div class="pub-item fade-in">
+                <div class="pub-number">01</div>
+                <div class="pub-content">
+                    <h4>Low-dose CT reconstruction with deep learning denoising</h4>
+                    <div class="pub-journal">IEEE Transactions on Biomedical Engineering</div>
+                </div>
+            </div>
+            <div class="pub-item fade-in">
+                <div class="pub-number">02</div>
+                <div class="pub-content">
+                    <h4>Photon-counting spectral CT simulation framework</h4>
+                    <div class="pub-journal">Medical Physics</div>
+                </div>
+            </div>
+            <div class="pub-item fade-in">
+                <div class="pub-number">03</div>
+                <div class="pub-content">
+                    <h4>Optimization algorithms for medical image reconstruction</h4>
+                    <div class="pub-journal">Journal of Computational Mathematics</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="fade-in">Let's Build Together</h2>
+        <p class="fade-in">Open to ML Engineering roles in medical AI, computer vision, and healthcare technology.</p>
+        <div class="contact-links fade-in">
+            <a href="mailto:longwenting@gmail.com" class="contact-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                longwenting@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/wentinglong" target="_blank" class="contact-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            <a href="https://www.longvisai.com" target="_blank" class="contact-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                Portfolio
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div>© 2024 Wenting Long. Built with precision.</div>
+        <div>Ph.D. Computational Mathematics | Medical AI Specialist</div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth parallax for background glows
+        document.addEventListener('mousemove', (e) => {
+            const glows = document.querySelectorAll('.bg-glow');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            glows.forEach((glow, i) => {
+                const speed = (i + 1) * 20;
+                glow.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
