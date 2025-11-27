@@ -65,13 +65,155 @@
         .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--text); }
         .logo-text span { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
         .nav-cta {
             padding: 0.7rem 1.5rem; background: var(--gradient-2); color: var(--primary);
-            text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;
+            text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; border: none;
         }
         .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+            padding: 2rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--secondary); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2.5rem; max-width: 420px; width: 100%;
+            position: relative; animation: modalIn 0.3s ease;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-lg { max-width: 560px; }
+        .modal-booking { max-width: 500px; }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-close {
+            position: absolute; top: 1.2rem; right: 1.2rem;
+            background: none; border: none; color: var(--text-dim);
+            font-size: 1.5rem; cursor: pointer; transition: color 0.3s ease;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+        }
+        .modal-close:hover { color: var(--accent); background: var(--accent-dim); }
+        .modal h3 {
+            font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .modal-subtitle {
+            color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem;
+        }
+
+        /* Contact Modal Items */
+        .contact-item {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 1.2rem; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: 12px;
+            margin-bottom: 0.8rem; transition: all 0.3s ease;
+            text-decoration: none; color: var(--text);
+        }
+        .contact-item:hover {
+            border-color: rgba(0,212,170,0.3); transform: translateX(5px);
+        }
+        .contact-icon {
+            width: 40px; height: 40px; background: var(--accent-dim);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); flex-shrink: 0;
+        }
+        .contact-info { flex: 1; }
+        .contact-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+        .contact-value { font-size: 0.9rem; font-weight: 500; }
+
+        /* About Modal */
+        .about-modal-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .about-avatar {
+            width: 80px; height: 80px; background: var(--gradient-1); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--primary);
+            flex-shrink: 0;
+        }
+        .about-header-text h3 { margin-bottom: 0.2rem; }
+        .about-header-text .title {
+            color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.75rem;
+        }
+        .about-bio { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        .about-credentials { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .credential-tag {
+            display: flex; align-items: center; gap: 0.4rem;
+            padding: 0.5rem 0.8rem; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: 8px;
+            font-size: 0.8rem; color: var(--text-dim);
+        }
+        .credential-tag svg { color: var(--accent); width: 14px; height: 14px; }
+
+        /* Booking Form Styles */
+        .booking-form { display: flex; flex-direction: column; gap: 1.2rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-label {
+            font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .form-input, .form-select, .form-textarea {
+            padding: 0.9rem 1rem; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: 10px;
+            color: var(--text); font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; transition: all 0.3s ease;
+            width: 100%;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none; border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: var(--text-dim); opacity: 0.6;
+        }
+        .form-select {
+            appearance: none; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8aa3' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        .form-select option { background: var(--secondary); color: var(--text); }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .form-submit {
+            padding: 1rem 2rem; background: var(--gradient-2); color: var(--primary);
+            border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; margin-top: 0.5rem;
+        }
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+        .form-submit:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none;
+        }
+        .form-note {
+            font-size: 0.75rem; color: var(--text-dim); text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none; text-align: center; padding: 2rem;
+        }
+        .success-message.show { display: block; }
+        .success-icon {
+            width: 70px; height: 70px; background: var(--accent-dim);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem; color: var(--accent); font-size: 2rem;
+        }
+        .success-message h4 {
+            font-family: 'Syne', sans-serif; font-size: 1.4rem; margin-bottom: 0.5rem;
+        }
+        .success-message p { color: var(--text-dim); font-size: 0.95rem; }
 
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
@@ -179,20 +321,6 @@
         .benefit-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: 0.8rem; }
         .benefit-card p { color: var(--text-dim); font-size: 0.95rem; }
 
-        .about { padding: 8rem 4rem; position: relative; z-index: 1; }
-        .about-content { display: grid; grid-template-columns: auto 1fr; gap: 4rem; max-width: 900px; margin: 0 auto; align-items: center; }
-        .about-image {
-            width: 180px; height: 180px; background: var(--gradient-1); border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--primary);
-        }
-        .about-text h3 { font-family: 'Syne', sans-serif; font-size: 1.6rem; margin-bottom: 0.3rem; }
-        .about-title { color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-bottom: 1.2rem; }
-        .about-text p { color: var(--text-dim); font-size: 1rem; margin-bottom: 1.2rem; }
-        .about-credentials { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .credential { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--text-dim); }
-        .credential svg { color: var(--accent); }
-
         .cta-section {
             padding: 8rem 4rem; text-align: center; position: relative; z-index: 1;
             background: var(--secondary); border-top: 1px solid var(--border);
@@ -201,10 +329,20 @@
         .cta-section p { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem; }
         .cta-buttons { display: flex; justify-content: center; gap: 1rem; }
 
-        .collaborations { padding: 4rem; text-align: center; position: relative; z-index: 1; border-top: 1px solid var(--border); }
-        .collaborations-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 2rem; }
-        .collaborations-logos { display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; opacity: 0.5; }
-        .collaborations-logo { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--text-dim); }
+        .collaborations { padding: 5rem 4rem; text-align: center; position: relative; z-index: 1; border-top: 1px solid var(--border); }
+        .collaborations-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 3rem; }
+        .collaborations-grid { display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; }
+        .collab-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0.7; transition: opacity 0.3s ease; }
+        .collab-item:hover { opacity: 1; }
+        .collab-logo {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--border); background: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        .collab-item:hover .collab-logo { border-color: var(--accent); }
+        .collab-logo svg { width: 50px; height: 50px; }
+        .collab-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-dim); }
 
         footer {
             padding: 3rem 4rem; border-top: 1px solid var(--border);
@@ -212,7 +350,7 @@
         }
         .footer-logo { display: flex; align-items: center; gap: 0.5rem; }
         .footer-links { display: flex; gap: 2rem; }
-        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; cursor: pointer; }
         .footer-links a:hover { color: var(--accent); }
         .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-dim); }
 
@@ -220,19 +358,21 @@
         @media (max-width: 900px) {
             .platform-showcase { grid-template-columns: 1fr; }
             .benefits-grid { grid-template-columns: 1fr; }
-            .about-content { grid-template-columns: 1fr; text-align: center; }
-            .about-image { margin: 0 auto; }
-            .about-credentials { justify-content: center; }
+            .form-row { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             nav { padding: 1rem 2rem; }
             .nav-links { display: none; }
-            section, .hero, .platform, .benefits, .about, .cta-section { padding: 4rem 2rem; }
+            section, .hero, .platform, .benefits, .cta-section { padding: 4rem 2rem; }
             .modules-grid { grid-template-columns: 1fr; }
             .hero-cta, .cta-buttons { flex-direction: column; align-items: center; }
             footer { flex-direction: column; gap: 2rem; text-align: center; }
             .footer-links { flex-wrap: wrap; justify-content: center; }
-            .collaborations-logos { gap: 2rem; }
+            .collaborations-grid { gap: 2rem; }
+            .collab-logo { width: 60px; height: 60px; }
+            .collab-logo svg { width: 36px; height: 36px; }
+            .about-modal-header { flex-direction: column; text-align: center; }
+            .modal { padding: 2rem 1.5rem; }
         }
 
         .fade-in { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
@@ -245,16 +385,181 @@
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-glow bg-glow-3"></div>
 
+    <!-- About Modal -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal modal-lg">
+            <button class="modal-close" onclick="closeAboutModal()">&times;</button>
+            <div class="about-modal-header">
+                <div class="about-avatar">WL</div>
+                <div class="about-header-text">
+                    <h3>Wenting Long, Ph.D.</h3>
+                    <div class="title">Founder & CEO, LongVis.AI</div>
+                </div>
+            </div>
+            <p class="about-bio">With a Ph.D. in Computational Mathematics and 8+ years of experience in medical imaging AI, I founded LongVis.AI to bridge the gap between cutting-edge research and clinical practice. My work at Yale, Emory, and Sun Yat-sen University has produced 7 peer-reviewed publications and laid the technical foundation for MedVision.</p>
+            <div class="about-credentials">
+                <div class="credential-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    Ph.D. Computational Math
+                </div>
+                <div class="credential-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    7 Publications
+                </div>
+                <div class="credential-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    Yale · Emory · SYSU
+                </div>
+                <div class="credential-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    8+ Years in Medical AI
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeContactModal()">&times;</button>
+            <h3>Get in Touch</h3>
+            <p class="modal-subtitle">Interested in MedVision? Let's connect.</p>
+            <a href="mailto:longwenting@gmail.com" class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">longwenting@gmail.com</div>
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/in/wentinglong" target="_blank" class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">linkedin.com/in/wentinglong</div>
+                </div>
+            </a>
+            <a href="https://longvisai.com" class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">Website</div>
+                    <div class="contact-value">longvisai.com</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Booking/Demo Request Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal modal-booking">
+            <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+            
+            <!-- Form -->
+            <div id="bookingForm">
+                <h3>Request a Demo</h3>
+                <p class="modal-subtitle">Schedule a personalized walkthrough of MedVision.</p>
+                
+                <form class="booking-form" action="https://formspree.io/f/xpwzgvqk" method="POST" id="demoForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name *</label>
+                            <input type="text" name="firstName" class="form-input" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" name="lastName" class="form-input" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" name="email" class="form-input" placeholder="john@hospital.org" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Organization</label>
+                        <input type="text" name="organization" class="form-input" placeholder="Hospital / Company name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <select name="role" class="form-select">
+                            <option value="">Select your role</option>
+                            <option value="physician">Physician / Radiologist</option>
+                            <option value="researcher">Researcher</option>
+                            <option value="administrator">Healthcare Administrator</option>
+                            <option value="it">IT / Technical</option>
+                            <option value="investor">Investor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Preferred Date</label>
+                            <input type="date" name="preferredDate" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Time</label>
+                            <select name="preferredTime" class="form-select">
+                                <option value="">Select time</option>
+                                <option value="morning">Morning (9AM - 12PM)</option>
+                                <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                <option value="evening">Evening (5PM - 8PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Interest / Questions</label>
+                        <textarea name="message" class="form-textarea" placeholder="Tell us about your use case or any specific questions..."></textarea>
+                    </div>
+                    
+                    <input type="hidden" name="_subject" value="New Demo Request - LongVis.AI">
+                    
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        Submit Request
+                    </button>
+                    
+                    <p class="form-note">We'll respond within 24 hours to confirm your demo.</p>
+                </form>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✓</div>
+                <h4>Request Submitted!</h4>
+                <p>Thank you for your interest in MedVision. We'll contact you within 24 hours to schedule your demo.</p>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <a href="#" class="logo">
             <div class="logo-icon">L</div>
             <div class="logo-text">LongVis<span>.AI</span></div>
         </a>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a onclick="openAboutModal()">About</a></li>
+            <li><a onclick="openContactModal()">Contact</a></li>
         </ul>
-        <a href="#contact" class="nav-cta">Request Demo</a>
+        <button class="nav-cta" onclick="openBookingModal()">Request Demo</button>
     </nav>
 
     <section class="hero">
@@ -263,7 +568,7 @@
             <h1>Enterprise <span class="gradient">Medical Imaging AI</span> Platform</h1>
             <p class="hero-subtitle">MedVision empowers healthcare institutions with AI-driven lung disease detection, radiotherapy toxicity prediction, and automated clinical reporting — all in one unified platform.</p>
             <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">Request Demo</a>
+                <button class="btn btn-primary" onclick="openBookingModal()">Request Demo</button>
                 <a href="#platform" class="btn btn-secondary">Explore Platform</a>
             </div>
         </div>
@@ -370,52 +675,14 @@
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="section-header fade-in">
-            <div class="section-tag">// About</div>
-            <h2 class="section-title">About LongVis.AI</h2>
-        </div>
-        <div class="about-content fade-in">
-            <div class="about-image">WL</div>
-            <div class="about-text">
-                <h3>Wenting Long, Ph.D.</h3>
-                <div class="about-title">Founder & CEO</div>
-                <p>With a Ph.D. in Computational Mathematics and 8+ years of experience in medical imaging AI, I founded LongVis.AI to bridge the gap between cutting-edge research and clinical practice. My work at Yale, Emory, and Sun Yat-sen University has produced 7 peer-reviewed publications and laid the technical foundation for MedVision.</p>
-                <div class="about-credentials">
-                    <div class="credential">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                        Ph.D. Computational Math
-                    </div>
-                    <div class="credential">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        7 Publications
-                    </div>
-                    <div class="credential">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        Yale · Emory · SYSU
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="cta-section">
+    <section class="cta-section">
         <h2 class="fade-in">Ready to Transform Your Clinical Workflow?</h2>
         <p class="fade-in">Schedule a demo to see how MedVision can enhance diagnostic accuracy and reduce physician workload.</p>
         <div class="cta-buttons fade-in">
-            <a href="mailto:longwenting@gmail.com" class="btn btn-primary">Request Demo</a>
+            <button class="btn btn-primary" onclick="openBookingModal()">Request Demo</button>
             <a href="https://www.linkedin.com/in/wentinglong" target="_blank" class="btn btn-secondary">Connect on LinkedIn</a>
         </div>
     </section>
-
-    <div class="collaborations fade-in">
-        <div class="collaborations-label">Research Collaborations</div>
-        <div class="collaborations-logos">
-            <span class="collaborations-logo">Yale University</span>
-            <span class="collaborations-logo">Emory University</span>
-            <span class="collaborations-logo">Sun Yat-sen University</span>
-        </div>
-    </div>
 
     <footer>
         <div class="footer-logo">
@@ -423,18 +690,102 @@
             <div class="logo-text" style="font-size:1.1rem;">LongVis<span>.AI</span></div>
         </div>
         <div class="footer-links">
-            <a href="#about">About</a>
-            <a href="mailto:longwenting@gmail.com">Contact</a>
+            <a onclick="openAboutModal()">About</a>
+            <a onclick="openContactModal()">Contact</a>
         </div>
         <div class="footer-copy">© 2024 LongVis.AI. All rights reserved.</div>
     </footer>
 
     <script>
+        // Modal Functions
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Reset form state
+            document.getElementById('bookingForm').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+        }
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modals on overlay click
+        document.getElementById('aboutModal').addEventListener('click', function(e) { if (e.target === this) closeAboutModal(); });
+        document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeContactModal(); });
+        document.getElementById('bookingModal').addEventListener('click', function(e) { if (e.target === this) closeBookingModal(); });
+        
+        // Close modals on Escape key
+        document.addEventListener('keydown', function(e) { 
+            if (e.key === 'Escape') { 
+                closeAboutModal(); 
+                closeContactModal(); 
+                closeBookingModal();
+            } 
+        });
+
+        // Form submission handling
+        const form = document.getElementById('demoForm');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    document.getElementById('bookingForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                alert('There was an error submitting your request. Please try again or email us directly at longwenting@gmail.com');
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Request';
+        });
+
+        // Set minimum date for date picker (today)
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+
+        // Scroll animations
         const fadeElements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         fadeElements.forEach(el => observer.observe(el));
+
+        // Background parallax
         document.addEventListener('mousemove', (e) => {
             const glows = document.querySelectorAll('.bg-glow');
             const x = e.clientX / window.innerWidth, y = e.clientY / window.innerHeight;
