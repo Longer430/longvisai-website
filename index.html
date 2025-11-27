@@ -56,42 +56,14 @@
             z-index: 1000; background: rgba(7, 8, 12, 0.85);
             backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
         }
-
-        /* UPDATED LOGO STYLES */
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        
-        /* NEW: Custom Full Logo Icon (Placeholder SVG based on screenshot) */
-        .logo-full-icon {
-            width: 38px; height: 38px;
-            /* Note: This is a placeholder SVG. For final use, you should replace this data URI with a cleaner image source. */
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='0' y='0' width='40' height='40' fill='none'/%3E%3Cpath d='M20 5C13.925 5 9 9.925 9 16V22C9 28.075 13.925 33 20 33C26.075 33 31 28.075 31 22V16C31 9.925 26.075 5 20 5ZM20 28C16.134 28 13 24.866 13 21C13 17.134 16.134 14 20 14C23.866 14 27 17.134 27 21C27 24.866 23.866 28 20 28Z' fill='rgba(0, 163, 255, 0.1)' stroke='%2300a3ff' stroke-width='1.5'/%3E%3Cpath d='M16 22C16 19.238 18.238 17 21 17C23.762 17 26 19.238 26 22V27.5C26 28.328 25.328 29 24.5 29H15.5C14.672 29 14 28.328 14 27.5V22Z' fill='%2300a3ff'/%3E%3C/svg%3E") center / contain no-repeat;
+        .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--gradient-1); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--primary);
         }
-
-        /* NEW: Custom Full Logo Text (Replacing .logo-text) - FIXES OVERLAP */
-        .logo-text-full {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--text);
-            display: flex; /* Key to layout and fixing overlap */
-            align-items: baseline;
-        }
-
-        .logo-text-main {
-            color: var(--text);
-        }
-
-        .logo-text-sub {
-            background: var(--gradient-1); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            background-clip: text;
-            font-size: 1.15em;
-            font-weight: 800;
-            margin-left: 0.15em; /* FIX: Adds spacing to prevent overlap */
-        }
-        /* END OF UPDATED LOGO STYLES */
-
+        .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--text); }
+        .logo-text span { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--accent); }
@@ -275,11 +247,8 @@
 
     <nav>
         <a href="#" class="logo">
-            <div class="logo-full-icon"></div>
-            <div class="logo-text-full">
-                <span class="logo-text-main">LongVis</span>
-                <span class="logo-text-sub">.AI</span>
-            </div>
+            <div class="logo-icon">L</div>
+            <div class="logo-text">LongVis<span>.AI</span></div>
         </a>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
@@ -450,11 +419,8 @@
 
     <footer>
         <div class="footer-logo">
-            <div class="logo-full-icon" style="width:28px;height:28px;"></div>
-            <div class="logo-text-full" style="font-size:1.1rem;">
-                <span class="logo-text-main">LongVis</span>
-                <span class="logo-text-sub">.AI</span>
-            </div>
+            <div class="logo-icon" style="width:28px;height:28px;font-size:0.9rem;">L</div>
+            <div class="logo-text" style="font-size:1.1rem;">LongVis<span>.AI</span></div>
         </div>
         <div class="footer-links">
             <a href="#about">About</a>
