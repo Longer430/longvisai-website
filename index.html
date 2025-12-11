@@ -56,14 +56,10 @@
             z-index: 1000; background: rgba(7, 8, 12, 0.85);
             backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
         }
-        .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-        .logo-icon {
-            width: 36px; height: 36px; background: var(--gradient-1); border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--primary);
-        }
-        .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--text); }
-        .logo-text span { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+        .logo-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--text); }
+        .logo-text .ai { background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
@@ -552,8 +548,21 @@
 
     <nav>
         <a href="#" class="logo">
-            <div class="logo-icon">L</div>
-            <div class="logo-text">LongVis<span>.AI</span></div>
+            <div class="logo-icon">
+                <svg width="40" height="40" viewBox="0 0 64 64">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4aa"/>
+                            <stop offset="100%" style="stop-color:#00a3ff"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="32" cy="32" r="29" fill="none" stroke="url(#logoGrad)" stroke-width="3"/>
+                    <path d="M26 18 C18 22 14 30 16 44 C17 50 22 52 26 48 L26 18 Z" fill="url(#logoGrad)" opacity="0.85"/>
+                    <path d="M38 18 C46 22 50 30 48 44 C47 50 42 52 38 48 L38 18 Z" fill="url(#logoGrad)" opacity="0.85"/>
+                    <rect x="30" y="12" width="4" height="8" rx="1" fill="url(#logoGrad)"/>
+                </svg>
+            </div>
+            <div class="logo-text">LongVis<span class="ai">.AI</span></div>
         </a>
         <ul class="nav-links">
             <li><a onclick="openAboutModal()">About</a></li>
@@ -686,8 +695,19 @@
 
     <footer>
         <div class="footer-logo">
-            <div class="logo-icon" style="width:28px;height:28px;font-size:0.9rem;">L</div>
-            <div class="logo-text" style="font-size:1.1rem;">LongVis<span>.AI</span></div>
+            <svg width="32" height="32" viewBox="0 0 64 64">
+                <defs>
+                    <linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00d4aa"/>
+                        <stop offset="100%" style="stop-color:#00a3ff"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="32" cy="32" r="29" fill="none" stroke="url(#footerGrad)" stroke-width="3"/>
+                <path d="M26 18 C18 22 14 30 16 44 C17 50 22 52 26 48 L26 18 Z" fill="url(#footerGrad)" opacity="0.85"/>
+                <path d="M38 18 C46 22 50 30 48 44 C47 50 42 52 38 48 L38 18 Z" fill="url(#footerGrad)" opacity="0.85"/>
+                <rect x="30" y="12" width="4" height="8" rx="1" fill="url(#footerGrad)"/>
+            </svg>
+            <div class="logo-text" style="font-size:1.1rem;">LongVis<span class="ai">.AI</span></div>
         </div>
         <div class="footer-links">
             <a onclick="openAboutModal()">About</a>
